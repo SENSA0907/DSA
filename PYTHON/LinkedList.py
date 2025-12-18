@@ -15,7 +15,7 @@ class LinkedList:
         while temp is not None:
             print(temp.value)
             temp = temp.next
-        print(self.size)
+        print('size of LL ',self.size)
     
     def append(self, value):
         """ check if LL is empty """
@@ -88,6 +88,40 @@ class LinkedList:
                 temp = temp.next
             temp.value = value
         return True
+    
+    def insert(self, index, value):
+        if index < 0 or index > self.size:
+            return False
+        if index == 0:
+            return self.prepend(value)
+        if index == self.size:
+            return self.append(value)
+        temp = self.head
+        for _ in range(index-1):
+            temp = temp.next
+        newNode = Node(value)
+        newNode.next = temp.next
+        temp.next = newNode
+        self.size += 1
+        return temp
+    
+    def remove(self, index):
+        if index < 0 or index > self.size:
+            return False
+        if index == 0:
+            return self.popFirst()
+        if index == self.size:
+            return self.pop()
+        temp = self.head
+        prev = self.head
+        for _ in range(index):
+            prev = temp
+            temp = temp.next
+        prev.next = temp.next
+        temp.next = None
+        self.size -= 1
+        print('removed', temp.value)
+        
         
                 
 
@@ -104,11 +138,16 @@ linkedList.pop();
 # linkedList.print_list()
 linkedList.prepend(99)
 # linkedList.print_list()
-print(linkedList.popFirst())
+# print(linkedList.popFirst())
 # linkedList.print_list()
 linkedList.append(55)
 linkedList.append(89)
-linkedList.print_list()
-print(linkedList.get(3))
+# linkedList.print_list()
+# print(linkedList.get(3))
 linkedList.set_value(3, 10000)
+linkedList.print_list()
+print('************')
+linkedList.insert(3,'sen')
+linkedList.print_list()
+linkedList.remove(5)
 linkedList.print_list()

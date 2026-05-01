@@ -15,8 +15,23 @@ public class DiagonalDifference2D {
 
         return Math.abs(secondaryRowSum-primaryRowSum);
     }
+
+    static int diagonalDifferenceOptimised(int[][] mat) {
+        int primaryRowSum = 0;
+        int secondaryRowSum = 0;
+        int matLen = mat.length;
+
+        for (int i=0; i<matLen; i++) {
+            primaryRowSum += mat[i][i]; // representing j interms of i
+            secondaryRowSum += mat[i][matLen-1-i]; // i+j = n-1 --> j = n-1-i
+        }
+
+        return Math.abs(secondaryRowSum-primaryRowSum);
+    }
     public static void main(String[] args) {
         System.out.println(diagonalDifference(new int[][] {{1,2,3}, {4,5,6}, {9,8,9}}));
         System.out.println(diagonalDifference(new int[][] {{1,2,3,4}, {4,5,6,7}, {9,8,9,11}, {54,56,56,78}}));
+        System.out.println(diagonalDifferenceOptimised(new int[][] {{1,2,3}, {4,5,6}, {9,8,9}}));
+        System.out.println(diagonalDifferenceOptimised(new int[][] {{1,2,3,4}, {4,5,6,7}, {9,8,9,11}, {54,56,56,78}}));
     }
 }
